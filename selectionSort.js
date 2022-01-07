@@ -13,23 +13,21 @@
 // This algorithm has a O(n^2) time complexity. You can read more about them here:
 // https://www.rithmschool.com/courses/javascript-computer-science-fundamentals/basic-
 // sorting-algorithms
-function selectionSort(arr,comparator){
-    let minIdx;
-    if(typeof comparator !== 'function'){
-        comparator = (a, b) => a - b;
+function selectionSort(arr, comparator) {
+  let minIdx;
+  if (typeof comparator !== "function") {
+    comparator = (a, b) => a - b;
+  }
+  for (let i = 0; i < arr.length - 1; i++) {
+    minIdx = i;
+    for (let j = i + 1; j < arr.length; j++) {
+      if (comparator(arr[j], arr[minIdx]) < 0) minIdx = j;
     }
-    for(let i = 0; i < arr.length - 1; i++){
-        minIdx = i;
-        for(let j = i + 1; j < arr.length; j++){
-            if(comparator(arr[j],arr[minIdx]) < 0) minIdx = j;
-        }
-        if(minIdx !== i) [arr[i],arr[minIdx]] = [arr[minIdx], arr[i]];
-    }
-    return arr;
+    if (minIdx !== i) [arr[i], arr[minIdx]] = [arr[minIdx], arr[i]];
+  }
+  return arr;
 }
-console.log(selectionSort([4,20,12,10,8,5]))
-console.log(selectionSort([0,-10,5,2]))
-console.log(selectionSort([1,2,3]))
-console.log(selectionSort([]))
-
-
+console.log(selectionSort([4, 20, 12, 10, 8, 5]));
+console.log(selectionSort([0, -10, 5, 2]));
+console.log(selectionSort([1, 2, 3]));
+console.log(selectionSort([]));

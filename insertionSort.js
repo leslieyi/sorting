@@ -18,16 +18,19 @@
 
 //The insertion sort example shown in the video works, but there's a small problem with variable scoping for j. j is declared as a var in the for loop and thus it is accessible outside of the loop and thus arr[j+1] = currentVal kind of works, but isn't this ideally a bad practice and adds to confusion? if I change the var to a let this algorithm wouldn't necessarily work since then j would be scoped to the 2nd for loop block. (My assumption here is if I am answering algorithm in javascript then the job role is javascript related and this could become a flag to the interviewer if they pay attention and can quickly turn into a snowball). A better solution, imo, is as below-
 
- const insertionSort = (arr) => {
-  for (let i = 1; i< arr.length; i++){
-    let current = arr[i];
-    for(let j = i-1; j >=0 && arr[j] > current; j--){
-      arr[j+1] = arr[j];      
-      arr[j] = current;
+function insertionSort(arr, comparator = (a,b) => a - b){
+    for (let i = 1; i < arr.length; i++) {
+        let currVal = arr[i];
+        let j = i - 1;
+        // check if j >=0 first or it will break the comparator!!
+        while(j >= 0 && comparator(arr[j], currVal) > 0 ) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = currVal;
     }
+    return arr;
   }
-  return arr;
-}
 console.log(insertionSort([4, 20, 12, 10, 7, 9])); // [4, 7, 9, 10, 12, 20]
 console.log(insertionSort([0, -10, 7, 4])); // [-10, 0, 4,
-console.log(insertionSort([1, 2,3])) 
+console.log(insertionSort([1, 2, 3]));

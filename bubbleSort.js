@@ -13,28 +13,26 @@
 // Bubble sort is an O(n^2) algorithm. You can read more about it here:
 // https://www.rithmschool.com/courses/javascript-computer-science-fundamentals/basic-
 // sorting-algorithms
-function bubbleSort(arr, comparator){
-    if(typeof comparator !== 'function'){
-        comparator = (v1, v2) =>{
-            return v1-v2;
-        }
+function bubbleSort(arr, comparator) {
+  if (typeof comparator !== "function") {
+    comparator = (a, b) => a - b;
+  }
+  let end = arr.length;
+  let swap = true;
+  while (end > 0 && swap) {
+    swap = false;
+    for (let i = 0; i < end - 1; i++) {
+      if (comparator(arr[i], arr[i + 1]) > 0) {
+        let tmp = arr[i + 1];
+        arr[i + 1] = arr[i];
+        arr[i] = tmp;
+        swap = true;
+      }
     }
-    let end = arr.length;
-    let swap = true;
-    while(end > 0 && swap){
-        swap = false;
-        for(let i = 0; i<end - 1; i++){
-          if(comparator(arr[i],arr[i+1])>0){
-              let tmp = arr[i+1];
-              arr[i+1] = arr[i];
-              arr[i] = tmp;
-              swap = true;
-          }
-        }
-      end --;
-    }
-    return arr;
+    end--;
+  }
+  return arr;
 }
 
-console.log(bubbleSort([4, 20, 12, 10, 7,9]))
-console.log(bubbleSort([-10,0,-20,4,1]))
+console.log(bubbleSort([4, 20, 12, 10, 7, 9]));
+console.log(bubbleSort([-10, 0, -20, 4, 1]));
